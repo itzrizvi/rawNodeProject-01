@@ -5,19 +5,15 @@ Title : Uptime Monitoring App
 // dependencies
 const http = require("http");
 const { handleReqRes } = require("./helpers/handleReqRes");
+const environment = require("./helpers/environment");
 // App main
 const app = {};
-
-// config
-app.config = {
-  port: 5000,
-};
 
 // Cerate server
 app.createServer = () => {
   const server = http.createServer(app.handleReqRes);
-  server.listen(app.config.port, () => {
-    console.log(`Listening to PORT ${app.config.port}`);
+  server.listen(environment.port, () => {
+    console.log(`Listening to PORT ${environment.port}`);
   });
 };
 
