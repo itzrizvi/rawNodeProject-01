@@ -6,8 +6,19 @@ Title : Uptime Monitoring App
 const http = require("http");
 const { handleReqRes } = require("./helpers/handleReqRes");
 const environment = require("./helpers/environment");
+const data = require("./lib/data");
 // App main
 const app = {};
+
+// Testing File System ---> ###
+data.create(
+  "test",
+  "newFile",
+  { name: "Bangladesh", lang: "Bangla" },
+  (err) => {
+    console.log(`Error was ${err}`);
+  }
+);
 
 // Cerate server
 app.createServer = () => {
