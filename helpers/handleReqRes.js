@@ -55,13 +55,20 @@ handler.handleReqRes = (req, res) => {
       const payloadString = JSON.stringify(payload);
 
       // return the final response
-      res.setHeader("Content-Type", "application/json");
-      res.writeHead(statusCode);
+
+      //  ### GIVING ERROR---->
+      // res.setHeader("Content-Type", "application/json");
+      // res.writeHead(statusCode);
+      //  ### GIVING ERROR---->
+
+      res.writeHead(statusCode, { "Content-Type": "application/json" });
       res.end(payloadString);
     });
 
+    //  ### GIVING ERROR---->
     // response
-    res.end("Hello NODE");
+    // res.end("Hello NODE");
+    //  ### GIVING ERROR---->
   });
 };
 

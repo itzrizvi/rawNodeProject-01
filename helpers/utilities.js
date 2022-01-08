@@ -24,7 +24,7 @@ utilities.parseJSON = (jsonString) => {
 utilities.hash = (str) => {
   if (typeof str === "string" && str.length > 0) {
     let hash = crypto
-      .createHmac("sha256", environtments[process.env.NODE_ENV].secretKey)
+      .createHmac("sha256", environtments.secretKey)
       .update(str)
       .digest("hex");
 
