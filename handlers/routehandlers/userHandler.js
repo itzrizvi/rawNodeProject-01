@@ -117,7 +117,80 @@ handler._users.get = (requestProperties, callback) => {
   }
 };
 
-handler._users.put = (requestProperties, callback) => {};
+handler._users.put = (requestProperties, callback) => {
+  //  Check the phone number is valid or not
+  const phone =
+    typeof requestProperties.body.phone === "string" &&
+    requestProperties.body.phone.trim().length === 11
+      ? requestProperties.body.phone
+      : false;
+
+  const firstName =
+    typeof requestProperties.body.firstName === "string" &&
+    requestProperties.body.firstName.trim().length > 0
+      ? requestProperties.body.firstName
+      : false;
+
+  const lastName =
+    typeof requestProperties.body.lastName === "string" &&
+    requestProperties.body.lastName.trim().length > 0
+      ? requestProperties.body.lastName
+      : false;
+
+  const password =
+    typeof requestProperties.body.password === "string" &&
+    requestProperties.body.password.trim().length > 0
+      ? requestProperties.body.password
+      : false;
+
+  // Validation
+  if (phone) {
+    if (firstName || lastName || password) {
+      // Lokkup for the user
+      data.read("users", phone, (err, usData) => {
+        console.log(usData);
+        const userData = { ...parseJSON(usData) };
+
+        if (!err && userData) {
+          if (firstName) {
+            userData.firstName = firstName;
+          }
+          if (lastName) {
+            userData.lastName = lastName;
+          }
+          if (password) {
+            userData.password = hash(password);
+          }
+
+          //  Update to  database
+          data.update("users", phone, userData, (err) => {
+            if (!err) {
+              callback(200, {
+                error: "User was updated successfully!",
+              });
+            } else {
+              callback(500, {
+                error: "There was a problem in the server side!",
+              });
+            }
+          });
+        } else {
+          callback(400, {
+            error: "Your have a problem in your request!",
+          });
+        }
+      });
+    } else {
+      callback(400, {
+        error: "Your have a problem in your request!",
+      });
+    }
+  } else {
+    callback(400, {
+      error: "Invalid phone number.  Please try again!",
+    });
+  }
+};
 handler._users.delete = (requestProperties, callback) => {};
 
 module.exports = handler;
