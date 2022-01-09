@@ -89,6 +89,7 @@ handler._users.post = (requestProperties, callback) => {
   }
 };
 
+//  TODO  =>>>> Authentication
 handler._users.get = (requestProperties, callback) => {
   //  Check the phone number is valid or not
   const phone =
@@ -117,6 +118,7 @@ handler._users.get = (requestProperties, callback) => {
   }
 };
 
+//  TODO  =>>>> Authentication
 handler._users.put = (requestProperties, callback) => {
   //  Check the phone number is valid or not
   const phone =
@@ -191,6 +193,8 @@ handler._users.put = (requestProperties, callback) => {
     });
   }
 };
+
+//  TODO  =>>>> Authentication
 handler._users.delete = (requestProperties, callback) => {
   //  Check the phone number is valid or not
   const phone =
