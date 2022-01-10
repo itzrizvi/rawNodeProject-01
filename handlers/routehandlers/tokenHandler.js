@@ -73,7 +73,7 @@ handler._token.post = (requestProperties, callback) => {
     });
   }
 };
-
+//  Token GET API
 handler._token.get = (requestProperties, callback) => {
   //  Check the tokenId is valid or not
   const id =
@@ -100,7 +100,7 @@ handler._token.get = (requestProperties, callback) => {
   }
 };
 
-//  TODO  =>>>> Authentication
+//  Token PUT API
 handler._token.put = (requestProperties, callback) => {
   const id =
     typeof requestProperties.body.id === "string" &&
@@ -142,7 +142,7 @@ handler._token.put = (requestProperties, callback) => {
   }
 };
 
-//  TODO  =>>>> Authentication
+//  Token Delete API
 handler._token.delete = (requestProperties, callback) => {
   //  Check the token is valid or not
   const id =
