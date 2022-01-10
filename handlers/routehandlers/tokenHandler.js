@@ -22,6 +22,7 @@ handler.tokenHandler = (requestProperties, callback) => {
 
 handler._token = {};
 
+//  Token  POST  API
 handler._token.post = (requestProperties, callback) => {
   //  Validation for users token
   const phone =
@@ -73,13 +74,109 @@ handler._token.post = (requestProperties, callback) => {
   }
 };
 
-//  TODO  =>>>> Authentication
-handler._token.get = (requestProperties, callback) => {};
+handler._token.get = (requestProperties, callback) => {
+  //  Check the tokenId is valid or not
+  const id =
+    typeof requestProperties.queryStringObject.id === "string" &&
+    requestProperties.queryStringObject.id.trim().length === 19
+      ? requestProperties.queryStringObject.id
+      : false;
+  if (id) {
+    //  Lookup the token
+    data.read("tokens", id, (err, TKD) => {
+      const token = { ...parseJSON(TKD) };
+      if (!err && token) {
+        callback(200, token);
+      } else {
+        callback(404, {
+          error: "Requested token was not found!",
+        });
+      }
+    });
+  } else {
+    callback(404, {
+      error: "Requested tokens was not found!",
+    });
+  }
+};
 
 //  TODO  =>>>> Authentication
-handler._token.put = (requestProperties, callback) => {};
+handler._token.put = (requestProperties, callback) => {
+  const id =
+    typeof requestProperties.body.id === "string" &&
+    requestProperties.body.id.trim().length === 19
+      ? requestProperties.body.id
+      : false;
+
+  const extend =
+    typeof requestProperties.body.extend === "boolean" &&
+    requestProperties.body.extend === true
+      ? true
+      : false;
+
+  if (id && extend) {
+    data.read("tokens", id, (err, TKD) => {
+      let tokenObject = parseJSON(TKD);
+      if (tokenObject.tokenExpires > Date.now()) {
+        tokenObject.tokenExpires = Date.now() + 60 * 60 * 1000;
+        // Store The  Updated Data  here
+        data.update("tokens", id, tokenObject, (err) => {
+          if (!err) {
+            callback(200);
+          } else {
+            callback(500, {
+              error: "There was a server side error!",
+            });
+          }
+        });
+      } else {
+        callback(400, {
+          error: "This token  is already expired!",
+        });
+      }
+    });
+  } else {
+    callback(400, {
+      error: "There was a problem in  your request!",
+    });
+  }
+};
 
 //  TODO  =>>>> Authentication
-handler._token.delete = (requestProperties, callback) => {};
+handler._token.delete = (requestProperties, callback) => {
+  //  Check the token is valid or not
+  const id =
+    typeof requestProperties.queryStringObject.id === "string" &&
+    requestProperties.queryStringObject.id.trim().length === 19
+      ? requestProperties.queryStringObject.id
+      : false;
+
+  if (id) {
+    // Lookup the user
+    data.read("tokens", id, (err, TKD) => {
+      if (!err && TKD) {
+        data.delete("tokens", id, (err) => {
+          if (!err) {
+            callback(200, {
+              message: "Token was deleted successfully",
+            });
+          } else {
+            callback(500, {
+              error: "There was a server side error!!",
+            });
+          }
+        });
+      } else {
+        callback(400, {
+          error: "There was a server side error!!!",
+        });
+      }
+    });
+  } else {
+    callback(400, {
+      error: "There was a problem in  your reguest!!!",
+    });
+  }
+};
 
 module.exports = handler;
