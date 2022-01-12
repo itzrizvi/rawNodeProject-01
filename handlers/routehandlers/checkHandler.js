@@ -149,10 +149,10 @@ handler._check.post = (requestProperties, callback) => {
 // Check GET API
 handler._check.get = (requestProperties, callback) => {};
 
-//  TODO  =>>>> Authentication
+//  Check PUT API
 handler._check.put = (requestProperties, callback) => {};
 
-//  TODO  =>>>> Authentication
+//  Check DELETE API
 handler._check.delete = (requestProperties, callback) => {};
 
 module.exports = handler;
