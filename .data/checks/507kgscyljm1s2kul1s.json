@@ -1,0 +1,9 @@
+{
+  "id": "507kgscyljm1s2kul1s",
+  "userPhone": "01766922253",
+  "protocol": "http",
+  "url": "itzrizvi.com",
+  "method": "itzrizvi.com",
+  "successCodes": [200, 201],
+  "timeOutSeconds": [200, 201]
+}
