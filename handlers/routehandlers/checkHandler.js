@@ -22,6 +22,7 @@ handler.checkHandler = (requestProperties, callback) => {
 
 handler._check = {};
 
+// Check POST API
 handler._check.post = (requestProperties, callback) => {
   // Validate Inputs
   let protocol =
@@ -145,7 +146,7 @@ handler._check.post = (requestProperties, callback) => {
   }
 };
 
-//=>>>> Authentication
+// Check GET API
 handler._check.get = (requestProperties, callback) => {};
 
 //  TODO  =>>>> Authentication
