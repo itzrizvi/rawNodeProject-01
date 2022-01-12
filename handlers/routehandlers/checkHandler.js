@@ -78,6 +78,7 @@ handler._check.post = (requestProperties, callback) => {
                     ? userObject.checks
                     : [];
 
+                // maxChecks from  environment
                 if (userChecks.length < maxChecks) {
                   let checkId = createRandomString(20);
                   let checkObject = {
@@ -95,7 +96,7 @@ handler._check.post = (requestProperties, callback) => {
                     if (!err) {
                       //  Add  check  id to the users object
                       userObject.checks = userChecks;
-                      userObject.checks.push(checkId);
+                      userObject.checks.push(checkId); //--->>  couldn't got this
 
                       // Save the new user data
                       data.update("users", userPhone, userObject, (err) => {
