@@ -18,7 +18,7 @@ environments.production = {
   port: 5000,
   envName: "production",
   secretKey: "jsxposdivopqpxskjawlsz",
-  maxChecks: 5,
+  maxChecks: 5, //  --> Added  for  further changing  time
 };
 
 // determine which environemt have been passed
