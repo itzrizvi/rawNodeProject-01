@@ -27,13 +27,13 @@ handler._token.post = (requestProperties, callback) => {
   //  Validation for users token
   const phone =
     typeof requestProperties.body.phone === "string" &&
-    requestProperties.body.phone.trim().length === 11
+      requestProperties.body.phone.trim().length === 11
       ? requestProperties.body.phone
       : false;
 
   const password =
     typeof requestProperties.body.password === "string" &&
-    requestProperties.body.password.trim().length > 0
+      requestProperties.body.password.trim().length > 0
       ? requestProperties.body.password
       : false;
 
@@ -78,7 +78,7 @@ handler._token.get = (requestProperties, callback) => {
   //  Check the tokenId is valid or not
   const id =
     typeof requestProperties.queryStringObject.id === "string" &&
-    requestProperties.queryStringObject.id.trim().length === 19
+      requestProperties.queryStringObject.id.trim().length === 19
       ? requestProperties.queryStringObject.id
       : false;
   if (id) {
@@ -104,13 +104,13 @@ handler._token.get = (requestProperties, callback) => {
 handler._token.put = (requestProperties, callback) => {
   const id =
     typeof requestProperties.body.id === "string" &&
-    requestProperties.body.id.trim().length === 19
+      requestProperties.body.id.trim().length === 19
       ? requestProperties.body.id
       : false;
 
   const extend =
     typeof requestProperties.body.extend === "boolean" &&
-    requestProperties.body.extend === true
+      requestProperties.body.extend === true
       ? true
       : false;
 
@@ -147,7 +147,7 @@ handler._token.delete = (requestProperties, callback) => {
   //  Check the token is valid or not
   const id =
     typeof requestProperties.queryStringObject.id === "string" &&
-    requestProperties.queryStringObject.id.trim().length === 19
+      requestProperties.queryStringObject.id.trim().length === 19
       ? requestProperties.queryStringObject.id
       : false;
 
@@ -179,6 +179,7 @@ handler._token.delete = (requestProperties, callback) => {
   }
 };
 
+// Token Verify Function
 handler._token.verify = (id, phone, callback) => {
   data.read("tokens", id, (err, TKD) => {
     if (!err && TKD) {
