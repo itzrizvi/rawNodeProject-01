@@ -24,36 +24,38 @@ handler._check = {};
 
 // Check POST API
 handler._check.post = (requestProperties, callback) => {
-  // Validate Inputs
+  // Validate Inputs fir checking links
+
+  // Vakidate protocol
   let protocol =
     typeof requestProperties.body.protocol === "string" &&
-    ["http", "https"].indexOf(requestProperties.body.protocol) > -1
+      ["http", "https"].indexOf(requestProperties.body.protocol) > -1
       ? requestProperties.body.protocol
       : false;
 
   let url =
     typeof requestProperties.body.url === "string" &&
-    requestProperties.body.url.trim().length > 0
+      requestProperties.body.url.trim().length > 0
       ? requestProperties.body.url
       : false;
 
   let method =
     typeof requestProperties.body.method === "string" &&
-    ["GET", "POST", "PUT", "DELETE"].indexOf(requestProperties.body.method) > -1
+      ["GET", "POST", "PUT", "DELETE"].indexOf(requestProperties.body.method) > -1
       ? requestProperties.body.url
       : false;
 
   let successCodes =
     typeof requestProperties.body.successCodes === "object" &&
-    requestProperties.body.successCodes instanceof Array > -1
+      requestProperties.body.successCodes instanceof Array > -1
       ? requestProperties.body.successCodes
       : false;
 
   let timeOutSeconds =
     typeof requestProperties.body.timeOutSeconds === "number" &&
-    requestProperties.body.timeOutSeconds % 1 === 0 &&
-    requestProperties.body.timeOutSeconds >= 1 &&
-    requestProperties.body.timeOutSeconds <= 5
+      requestProperties.body.timeOutSeconds % 1 === 0 &&
+      requestProperties.body.timeOutSeconds >= 1 &&
+      requestProperties.body.timeOutSeconds <= 5
       ? requestProperties.body.successCodes
       : false;
 
@@ -75,7 +77,7 @@ handler._check.post = (requestProperties, callback) => {
                 let userObject = parseJSON(USRDT);
                 let userChecks =
                   typeof userObject.checks === "object" &&
-                  userObject.checks instanceof Array
+                    userObject.checks instanceof Array
                     ? userObject.checks
                     : [];
 
@@ -147,12 +149,12 @@ handler._check.post = (requestProperties, callback) => {
 };
 
 // Check GET API
-handler._check.get = (requestProperties, callback) => {};
+handler._check.get = (requestProperties, callback) => { };
 
 //  Check PUT API
-handler._check.put = (requestProperties, callback) => {};
+handler._check.put = (requestProperties, callback) => { };
 
 //  Check DELETE API
-handler._check.delete = (requestProperties, callback) => {};
+handler._check.delete = (requestProperties, callback) => { };
 
 module.exports = handler;
