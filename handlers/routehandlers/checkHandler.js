@@ -33,24 +33,28 @@ handler._check.post = (requestProperties, callback) => {
       ? requestProperties.body.protocol
       : false;
 
+  // Validate URL
   let url =
     typeof requestProperties.body.url === "string" &&
       requestProperties.body.url.trim().length > 0
       ? requestProperties.body.url
       : false;
 
+  // Validate Method
   let method =
     typeof requestProperties.body.method === "string" &&
       ["GET", "POST", "PUT", "DELETE"].indexOf(requestProperties.body.method) > -1
       ? requestProperties.body.url
       : false;
 
+  // Success status codes
   let successCodes =
     typeof requestProperties.body.successCodes === "object" &&
       requestProperties.body.successCodes instanceof Array > -1
       ? requestProperties.body.successCodes
       : false;
 
+  // Time out Seconds
   let timeOutSeconds =
     typeof requestProperties.body.timeOutSeconds === "number" &&
       requestProperties.body.timeOutSeconds % 1 === 0 &&
